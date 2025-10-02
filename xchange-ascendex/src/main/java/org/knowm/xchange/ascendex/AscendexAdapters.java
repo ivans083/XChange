@@ -199,8 +199,10 @@ public class AscendexAdapters {
                     .volumeScale(ascendexProductDto.getLotSize().scale())
                     .counterMinimumAmount(ascendexProductDto.getMinNotional())
                     .counterMaximumAmount(ascendexProductDto.getMaxNotional())
-                    .minimumAmount(ascendexProductDto.getLotSize())
-                    .amountStepSize(ascendexProductDto.getTickSize())
+                    .minimumAmount(ascendexProductDto.getMinQty())
+                    .maximumAmount(ascendexProductDto.getMaxQty())
+                    .amountStepSize(ascendexProductDto.getLotSize())
+                    .priceStepSize(ascendexProductDto.getTickSize())
                     .build()));
 
     return new ExchangeMetaData(currencyPairMetaDataMap, currencyMetaDataMap, null, null, null);
