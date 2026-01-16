@@ -13,11 +13,7 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import java.io.IOException;
 import org.knowm.xchange.kucoin.dto.request.OrderCreateApiRequest;
-import org.knowm.xchange.kucoin.dto.response.KucoinResponse;
-import org.knowm.xchange.kucoin.dto.response.OrderCancelResponse;
-import org.knowm.xchange.kucoin.dto.response.OrderCreateResponse;
-import org.knowm.xchange.kucoin.dto.response.OrderResponse;
-import org.knowm.xchange.kucoin.dto.response.Pagination;
+import org.knowm.xchange.kucoin.dto.response.*;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.SynchronizedValueFactory;
 
@@ -106,16 +102,18 @@ public interface OrderAPI {
    * Get a single order by order id.
    *
    * @param orderId The order id.
+   * @param symbol The order symbol.
    * @return The requested order.
    */
   @GET
-  @Path("/orders/{orderId}")
-  KucoinResponse<OrderResponse> getOrder(
+  @Path("/hf/orders/{orderId}")
+  KucoinResponse<HfOrderResponse> getOrder(
       @HeaderParam(APIConstants.API_HEADER_KEY) String apiKey,
       @HeaderParam(APIConstants.API_HEADER_SIGN) ParamsDigest signature,
       @HeaderParam(APIConstants.API_HEADER_TIMESTAMP) SynchronizedValueFactory<Long> nonce,
       @HeaderParam(APIConstants.API_HEADER_PASSPHRASE) String apiPassphrase,
-      @PathParam("orderId") String orderId)
+      @PathParam("orderId") String orderId,
+      @QueryParam("symbol") String symbol)
       throws IOException;
 
   /**

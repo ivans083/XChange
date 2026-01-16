@@ -6,12 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import org.knowm.xchange.client.ResilienceRegistries;
 import org.knowm.xchange.kucoin.dto.request.OrderCreateApiRequest;
-import org.knowm.xchange.kucoin.dto.response.HistOrdersResponse;
-import org.knowm.xchange.kucoin.dto.response.OrderCancelResponse;
-import org.knowm.xchange.kucoin.dto.response.OrderCreateResponse;
-import org.knowm.xchange.kucoin.dto.response.OrderResponse;
-import org.knowm.xchange.kucoin.dto.response.Pagination;
-import org.knowm.xchange.kucoin.dto.response.TradeResponse;
+import org.knowm.xchange.kucoin.dto.response.*;
 
 public class KucoinTradeServiceRaw extends KucoinBaseService {
 
@@ -50,10 +45,10 @@ public class KucoinTradeServiceRaw extends KucoinBaseService {
                 page));
   }
 
-  public OrderResponse getKucoinOrder(String id) throws IOException {
+  public HfOrderResponse getKucoinOrder(String symbol, String id) throws IOException {
     checkAuthenticated();
     return classifyingExceptions(
-        () -> orderApi.getOrder(apiKey, digest, nonceFactory, passphrase, id));
+        () -> orderApi.getOrder(apiKey, digest, nonceFactory, passphrase, id, symbol));
   }
 
   public Pagination<TradeResponse> getKucoinFills(
